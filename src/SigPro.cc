@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "SigPro.h"
+#include "Target.h"
 #include "TargetDecorator.h"
 #include "NoiseDecorator.h"
 #include "SignalDecorator.h"
@@ -26,6 +27,8 @@ void SigPro::setupSignal()
 
 void SigPro::generateScene()
 {
+    Target tgt;
+    tgt.getResponse().setRcs_dB(10.0,WATT);
     signal->setup();
     signal->stage();
     signal->contribute();
