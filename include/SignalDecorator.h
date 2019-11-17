@@ -10,14 +10,28 @@ class SignalDecorator : public Signal
 
     public:
         SignalDecorator(Signal *s): child(s) {};
-        ~SignalDecorator();
-        void StageSignal()
+        ~SignalDecorator() {};
+
+        // Interface Methods to Implement
+        void init()
         {
-            std::cout << "SignalDecorator: StageSignal() " << std::endl;
+            child->init();
+            std::cout << "init() - SignalDecorator" << std::endl;
+        };
+        void setup()
+        {
+            child->setup();
+            std::cout << "setup() - SignalDecorator" << std::endl;
+        };
+        void stage()
+        {
+            child->stage();
+            std::cout << "stage() - SignalDecorator" << std::endl;
         }
 
-        void PopulateSignal()
+        void contribute()
         {
-            std::cout << "SignalDecorator: PopulateSignal() " << std::endl;
+            child->contribute();
+            std::cout << "contribute() - SignalDecorator" << std::endl;
         }
 };

@@ -1,41 +1,28 @@
 #pragma once
 #include <vector>
 #include <complex>
+#include "ChannelMeta.h"
 
-class ChannelMeta
-{
-    private:
-    double startTime_seconds;
-    double startRange_meters;
-    double stopRange_meters;
-    double binSize_meters;
-    public:
-    ChannelMeta():
-        startTime_seconds(0.0),
-        startRange_meters(0.0),
-        stopRange_meters(0.0),
-        binSize_meters(0.0)
-        {};
-    ~ChannelMeta() {};
-
-    void set(double startTime_sec,
-            double startRange_m,
-            double stopRange_m,
-            double binSize_m)
-    {
-        startTime_seconds = startTime_sec;
-        startRange_meters = startRange_m;
-        stopRange_meters  = stopRange_m;
-        binSize_meters    = binSize_m;
-    };
-};
+// Define Channel Data Type
+typedef std::complex<double> ch_complex;
+typedef std::vector<ch_complex> ch_data;
 
 class Channel
 {
     private:
-    ChannelMeta meta;
-    std::vector<std::complex<double>> d;
+        ChannelMeta meta;
+        ch_data d;
     public:
-    Channel();
-    ~Channel();
+        Channel();
+        ~Channel();
+
+        // Data Mutators
+        void resize(size_t newSize);
+        void clear();
+        void fill(const ch_complex fillValue);
+
+        ch_data::iterator begin();
+        ch_data::const_iterator begin() const;
+        ch_data::iterator end();
+        ch_data::const_iterator end() const;
 };

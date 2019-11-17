@@ -18,12 +18,20 @@ class SignalImpl : public Signal
         ~SignalImpl();
        
         // Interface Methods to Implement
-        void StageSignal()
+        void init()
         {
-            std::cout << "SignalImp: stageImpl() " << std::endl;
+            std::cout << "init() - SignalImp" << std::endl;
         };
-        void PopulateSignal()
+        void setup()
         {
-            std::cout << "SignalImp: PopulateSignal() " << std::endl;
+            std::cout << "setup() - SignalImp" << std::endl;
+        };
+        void stage()
+        {
+            std::cout << "stage() - SignalImp" << std::endl;
+        };
+        void contribute()
+        {
+            std::cout << "contribute() - SignalImp" << std::endl;
         };
 };

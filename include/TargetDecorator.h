@@ -1,17 +1,18 @@
 #pragma once
 #include "SignalDecorator.h"
 #include "Channel.h"
+#include <map>
 
-class NoiseDecorator : public SignalDecorator
+class TargetDecorator : public SignalDecorator
 {
     private:
         Signal* child;
-        Channel staged_noise;
+        std::map<int,Channel> targetContributions;
 
-        void generateGaussianWhiteNoise();
+        void buildTargetResponse();
     public:
-        NoiseDecorator(Signal *s);
-        ~NoiseDecorator();
+        TargetDecorator(Signal *s);
+        ~TargetDecorator();
 
         // Interface Methods to Implement
         void init();
