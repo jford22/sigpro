@@ -1,6 +1,9 @@
 #pragma once
 #include "SignalDecorator.h"
 #include "Channel.h"
+// Forward Declare Classes
+class TxRxMeta;
+class Target;
 
 class NoiseDecorator : public SignalDecorator
 {
@@ -15,7 +18,7 @@ class NoiseDecorator : public SignalDecorator
 
         // Interface Methods to Implement
         void init();
-        void setup();
-        void stage();
-        void contribute();
+        void setup(const TxRxMeta& txrx_config, Target& target);
+        void stage(Channel& channel);
+        void contribute(Channel& channel);
 };

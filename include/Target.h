@@ -10,7 +10,9 @@ class State
     double z;
     public:
     State();
+    State(double x_in, double y_in, double z_in);
     ~State();
+    double getMagnitude();
 };
 
 class KinematicState
@@ -23,6 +25,13 @@ class KinematicState
     public:
     KinematicState();
     ~KinematicState();
+
+    void setPosition_meters(State pos_m_in) { pos_meters = pos_m_in;};
+    void setVelocity_mps(State vel_mps_in) { velocity_mps = vel_mps_in;};
+    void setAcceleration_mps2(State acc_mps2_in) { acceleration_mps2 = acc_mps2_in;};
+    void setJerk_mps3(State jerk_mps3_in) { jerk_mps3 = jerk_mps3_in;};
+
+    double getRange();
 };
 
 class TargetAmplification
@@ -33,6 +42,10 @@ class TargetAmplification
     public:
     TargetAmplification();
     ~TargetAmplification();
+
+    const std::string& getName() { return name;};
+    void setName(const std::string& name_in) { name = name_in;};
+    // Add for InputFile etc.
 };
 
 class TargetResponse
@@ -59,6 +72,7 @@ class Target
         TargetResponse targetResponse;
     public:
         unsigned int getId()            { return truthId;};
+        void setId(unsigned int truthId_in) { truthId = truthId_in;};
         KinematicState& getState()      { return state;};
         TargetAmplification getAmp()    { return targetAmp;};
         TargetResponse& getResponse()   { return targetResponse;};

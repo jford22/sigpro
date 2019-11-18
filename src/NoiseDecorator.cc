@@ -16,21 +16,22 @@ void NoiseDecorator::init()
     size_t size = 10;
     staged_noise.resize(size);
 }
-void NoiseDecorator::setup()
+void NoiseDecorator::setup(const TxRxMeta& txrx_config, Target& target)
 {
-    child->setup();
+    child->setup(txrx_config, target);
     std::cout << "setup() - NoiseDecorator" << std::endl;
 }
-void NoiseDecorator::stage()
+void NoiseDecorator::stage(Channel& channel)
 {
-    child->stage();   // Child call
+    child->stage(channel);   // Child call
     std::cout << "stage() - NoiseDecorator" << std::endl;
     generateGaussianWhiteNoise();
 }
-void NoiseDecorator::contribute()
+void NoiseDecorator::contribute(Channel& channel)
 {
-    child->contribute();   // Child call
+    child->contribute(channel);   // Child call
     std::cout << "contribute() - NoiseDecorator" << std::endl;
+    //channel += staged_noise; // TODO implement this oprator for Channel Type
 }
 
 // Generate Guassian Normal Noise

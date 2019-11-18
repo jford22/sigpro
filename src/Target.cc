@@ -1,4 +1,5 @@
 #include "Target.h"
+#include <cmath>
 
 State::State():
     x(0.0),
@@ -7,8 +8,22 @@ State::State():
 {
 }
 
+State::State(double x_in, double y_in, double z_in):
+    x(x_in),
+    y(y_in),
+    z(z_in)
+{
+}
+
 State::~State()
 {
+}
+
+double State::getMagnitude()
+{
+    const double magsqr = x*x + y*y + z*z;
+    const double mag = std::sqrt(magsqr);
+    return mag;
 }
 
 KinematicState::KinematicState():
@@ -21,6 +36,11 @@ KinematicState::KinematicState():
 
 KinematicState::~KinematicState()
 {
+}
+
+double KinematicState::getRange()
+{
+    return pos_meters.getMagnitude();
 }
 
 TargetAmplification::TargetAmplification():

@@ -1,4 +1,7 @@
 #pragma once
+class TxRxMeta;
+class Target;
+class Channel;
 
 class Signal
 {
@@ -8,9 +11,9 @@ public:
     // Do Initialization Tasks That doesn't Need to be done every Pass
     virtual void init() = 0;
     // Prepare - take in and setup parameters for specific pulse
-    virtual void setup() = 0;
+    virtual void setup(const TxRxMeta& txrx_config, Target& target) = 0;
     // Stage intermediate processing that can be done prior to contributing to agregate signal
-    virtual void stage() = 0;
+    virtual void stage(Channel& channel) = 0;
     // Contribute specific peice to agregate structure
-    virtual void contribute() = 0;
+    virtual void contribute(Channel& channel) = 0;
 };

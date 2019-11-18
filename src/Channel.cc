@@ -26,6 +26,16 @@ void Channel::fill(const std::complex<double> fillValue)
     std::fill(d.begin(), d.end(), fillValue);
 }
 
+void Channel::setMeta(ChannelMeta meta_in) 
+{ 
+    meta = meta_in;
+    applyMeta();
+}
+
+void Channel::applyMeta()
+{
+    resize(meta.getNumberOfBins());
+}
 // Iterator Function passthroughs
 ch_data::iterator Channel::begin()
 {

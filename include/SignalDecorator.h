@@ -3,6 +3,9 @@
 
 #include "Signal.h"
 
+class TxRxMeta;
+class Target;
+
 class SignalDecorator : public Signal
 {
     private:
@@ -18,20 +21,20 @@ class SignalDecorator : public Signal
             child->init();
             std::cout << "init() - SignalDecorator" << std::endl;
         };
-        void setup()
+        void setup(const TxRxMeta& txrx_config, Target& target)
         {
-            child->setup();
+            child->setup(txrx_config, target);
             std::cout << "setup() - SignalDecorator" << std::endl;
         };
-        void stage()
+        void stage(Channel& channel)
         {
-            child->stage();
+            child->stage(channel);
             std::cout << "stage() - SignalDecorator" << std::endl;
         }
 
-        void contribute()
+        void contribute(Channel& channel)
         {
-            child->contribute();
+            child->contribute(channel);
             std::cout << "contribute() - SignalDecorator" << std::endl;
         }
 };

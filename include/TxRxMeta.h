@@ -3,13 +3,13 @@
 
 // This Class Should Contain Information about The Transmit Waveform, it's timing and the receive window
 
+enum  Modulation {
+    LFM,
+    NLFM,
+    DPC,
+    TEST};
 class TxRxMeta
 {
-    enum  Modulation {
-        LFM,
-        NLFM,
-        DPC,
-        TEST};
     private: 
     // Transmit (TX) Parameters
     double tx_start_time_seconds;
@@ -27,40 +27,46 @@ class TxRxMeta
     double rx_window_rangeBin_resolution_meters;
     double rx_window_planned_doppler_Khz;
 
-    double rx_window_front_padding_bins;
-    double rx_window_back_padding_bins;
+    long rx_window_front_padding_bins;
+    long rx_window_back_padding_bins;
     public:
 TxRxMeta();
 ~TxRxMeta();
 
 // Getters
-double get_tx_start_time_seconds()      {return tx_start_time_seconds;};
-    double get_tx_stop_time_seconds()   { return tx_stop_time_seconds;};
-    double get_tx_start_frequency_GHz() { return tx_start_frequency_GHz;};
-    double get_tx_stop_frequency_GHz()  { return tx_stop_frequency_GHz;};
-    double get_tx_bandwidth_MHz()       { return tx_bandwidth_MHz;};
-    double get_tx_power_watts()         { return tx_power_watts;};
-    Modulation get_wf_modulation()      { return wf_modulation;};
+    double get_tx_start_time_seconds() const {return tx_start_time_seconds;};
+    double get_tx_stop_time_seconds()  const { return tx_stop_time_seconds;};
+    double get_tx_start_frequency_GHz()const { return tx_start_frequency_GHz;};
+    double get_tx_stop_frequency_GHz() const { return tx_stop_frequency_GHz;};
+    double get_tx_bandwidth_MHz()      const { return tx_bandwidth_MHz;};
+    double get_tx_power_watts()        const { return tx_power_watts;};
+    Modulation get_wf_modulation()     const { return wf_modulation;};
 
-    double get_rx_window_start_time_seconds()   { return rx_window_start_time_seconds;};
-    double get_rx_window_stop_time_seconds()    { return rx_window_stop_time_seconds;};
-    double get_rx_bandwidth_MHz()               { return rx_bandwidth_MHz;};
-    double get_rx_window_rangeBin_resolution_meters()   { return rx_window_rangeBin_resolution_meters;};
-    double get_rx_window_planned_doppler_Khz()  { return rx_window_planned_doppler_Khz;};
+    double get_rx_window_start_time_seconds() const { return rx_window_start_time_seconds;};
+    double get_rx_window_stop_time_seconds()  const { return rx_window_stop_time_seconds;};
+    double get_rx_bandwidth_MHz()             const { return rx_bandwidth_MHz;};
+    double get_rx_window_rangeBin_resolution_meters() const { return rx_window_rangeBin_resolution_meters;};
+    double get_rx_window_planned_doppler_Khz() const { return rx_window_planned_doppler_Khz;};
 
-    double get_rx_window_front_padding_bins()   { return rx_window_front_padding_bins;};
-    double get_rx_window_back_padding_bins()    { return rx_window_back_padding_bins;};
+    long get_rx_window_front_padding_bins() const { return rx_window_front_padding_bins;};
+    long get_rx_window_back_padding_bins()  const { return rx_window_back_padding_bins;};
 
     // Simple Calculated Getters
-    double get_tx_pulsewidth_sec()      { return tx_stop_time_seconds - tx_start_time_seconds;};
-    double get_pulse_center_freq_GHz()  
+    double get_tx_pulsewidth_sec()     const { return tx_stop_time_seconds - tx_start_time_seconds;};
+    double get_pulse_center_freq_GHz() const 
             { return (tx_start_frequency_GHz + tx_stop_frequency_GHz) / 2.0;};
 
-    double get_pulse_start_on_target_seconds()
+    double get_pulse_start_on_target_seconds() const
            { return (tx_start_time_seconds + rx_window_start_time_seconds) / 2.0;};
 
-    double get_pulse_stop_on_target_seconds()
+    double get_pulse_stop_on_target_seconds() const
            { return (tx_stop_time_seconds + rx_window_stop_time_seconds) / 2.0;};
+
+    double get_pulse_start_range_meters() const
+            { return (rx_window_start_time_seconds - tx_start_time_seconds) * LIGHTSPEED_m_p_sec;};
+
+    double get_pulse_stop_range_meters() const
+            { return (rx_window_stop_time_seconds - tx_stop_time_seconds) * LIGHTSPEED_m_p_sec;};
 
     // Setters
     void set_tx_start_time_seconds(double tx_start_time_seconds_in) 
@@ -90,9 +96,9 @@ double get_tx_start_time_seconds()      {return tx_start_time_seconds;};
     void set_rx_window_planned_doppler_Khz(double rx_window_planned_doppler_Khz_in)
                 {rx_window_planned_doppler_Khz = rx_window_planned_doppler_Khz_in;};
 
-    void set_rx_window_front_padding_bins(double rx_window_front_padding_bins_in)
+    void set_rx_window_front_padding_bins(long rx_window_front_padding_bins_in)
                 {rx_window_front_padding_bins = rx_window_front_padding_bins_in;};
-    void set_rx_window_back_padding_bins(double rx_window_back_padding_bins_in)
+    void set_rx_window_back_padding_bins(long rx_window_back_padding_bins_in)
                 {rx_window_back_padding_bins = rx_window_back_padding_bins_in;};
 
 };

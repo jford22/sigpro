@@ -25,4 +25,6 @@ class Channel
         ch_data::const_iterator begin() const;
         ch_data::iterator end();
         ch_data::const_iterator end() const;
+        void setMeta(ChannelMeta meta_in);
+        void applyMeta();
 };

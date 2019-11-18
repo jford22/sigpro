@@ -3,6 +3,9 @@
 #include "Channel.h"
 #include "Signal.h"
 
+class TxRxMeta;
+class ChannelMeta;
+
 class SignalImpl : public Signal
 {
     private:
@@ -22,16 +25,22 @@ class SignalImpl : public Signal
         {
             std::cout << "init() - SignalImp" << std::endl;
         };
-        void setup()
+        void setup(const TxRxMeta& txrx_config, Target& target)
         {
+            setupChannels(txrx_config);
+            (void)target;
             std::cout << "setup() - SignalImp" << std::endl;
         };
-        void stage()
+        void stage(Channel& /*channel*/)
         {
             std::cout << "stage() - SignalImp" << std::endl;
         };
-        void contribute()
+        void contribute(Channel& /*channel*/)
         {
             std::cout << "contribute() - SignalImp" << std::endl;
         };
+
+        // Setup Phase Helper Methods
+        void setupChannels(const TxRxMeta& txrx_config);
+        ChannelMeta buildChannelMeta(const TxRxMeta& txrx_config);
 };
