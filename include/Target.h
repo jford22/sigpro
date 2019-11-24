@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "DeciBel.h"
+#include "Enums.h"
 
 class State
 {
@@ -59,7 +60,7 @@ class TargetResponse
 
         TargetResponse();
         ~TargetResponse();
-        void setRcs_dB(double rcs_db_in, dB_REF_UNIT ref_unit_in)
+        void setRcs_dB(double rcs_db_in, UNITS ref_unit_in)
         { rcs_db.set_dB(rcs_db_in,ref_unit_in);};
 };
 

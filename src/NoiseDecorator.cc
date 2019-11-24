@@ -31,7 +31,7 @@ void NoiseDecorator::contribute(Channel& channel)
 {
     child->contribute(channel);   // Child call
     std::cout << "contribute() - NoiseDecorator" << std::endl;
-    //channel += staged_noise; // TODO implement this oprator for Channel Type
+    channel += staged_noise;
 }
 
 // Generate Guassian Normal Noise

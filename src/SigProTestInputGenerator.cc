@@ -1,6 +1,8 @@
 #include "SigProTestInputGenerator.h"
+#include "Target.h"
 #include "Constants.h"
 #include "TxRxMeta.h"
+#include "Enums.h"
 
 #include <string>
 
